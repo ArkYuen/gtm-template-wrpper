@@ -8,16 +8,25 @@ Google may provide), as modified from time to time.
 ___INFO___
 
 {
-  "displayName": "Wrpper Influencer Attribution",
-  "description": "Automatically attributes influencer-driven conversions to the originating creator. Reads the Wrpper click cookie and sends conversion events (purchase, add_to_cart, begin_checkout) to your Wrpper account - no custom code required. One install, full attribution.",
-  "categories": ["AFFILIATE_MARKETING", "ATTRIBUTION", "ADVERTISING"],
-  "id": "cvt_wrpper_influencer_attribution",
   "type": "TAG",
+  "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "containerContexts": ["WEB"],
-  "tosUrl": "https://wrpper.com/terms",
-  "privacyPolicyUrl": "https://wrpper.com/privacy"
+  "displayName": "Wrpper Influencer Attribution",
+  "categories": [
+    "AFFILIATE_MARKETING",
+    "ATTRIBUTION",
+    "ADVERTISING"
+  ],
+  "brand": {
+    "id": "github.com_ArkYuen",
+    "displayName": "Wrpper",
+    "thumbnail": ""
+  },
+  "description": "Automatically attributes influencer-driven conversions to the originating creator. Reads the Wrpper click cookie and sends conversion events (purchase, add_to_cart, begin_checkout) to your Wrpper account - no custom code required. One install, full attribution.",
+  "containerContexts": [
+    "WEB"
+  ]
 }
 
 ___TEMPLATE_PARAMETERS___
