@@ -8,7 +8,9 @@ ___INFO___
   "type": "TAG",
   "version": 1,
   "securityGroups": [],
-  "containerContexts": ["WEB"]
+  "containerContexts": ["WEB"],
+  "tosUrl": "https://wrpper.com/terms",
+  "privacyPolicyUrl": "https://wrpper.com/privacy"
 }
 
 ___TEMPLATE_PARAMETERS___
