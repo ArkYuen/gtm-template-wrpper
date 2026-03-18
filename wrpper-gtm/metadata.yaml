@@ -1,0 +1,7 @@
+homepage: "https://wrpper.com"
+documentation: "https://wrpper.com/docs/gtm"
+
+versions:
+  # Latest version
+  - sha: REPLACE_WITH_COMMIT_SHA_AFTER_FIRST_PUSH
+    changeNotes: Initial release — auto-detects purchase, add_to_cart, and begin_checkout events. Reads _wrp attribution cookie. Supports GA4 and UA ecommerce dataLayer formats.
