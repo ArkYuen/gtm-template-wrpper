@@ -585,7 +585,72 @@ ___WEB_PERMISSIONS___
   }
 ]
 
+___TESTS___
+
+scenarios:
+- name: Tag fires with valid config and click cookie
+  code: |-
+    const mockData = {
+      publishableKey: 'sf_pub_test',
+      orgId: 'test-org-id',
+      eventType: 'auto',
+      apiEndpoint: 'https://api.wrpper.com',
+      cookieName: '_wrp',
+      clickParam: 'inf_click_id',
+      debugMode: false,
+      currency: 'USD',
+      gtmOnSuccess: function() {},
+      gtmOnFailure: function() {}
+    };
+
+    mock('getCookieValues', function(name) {
+      if (name === '_wrp') {
+        return ['{"click_id":"test_click_123","ts":1700000000000}'];
+      }
+      return [];
+    });
+
+    mock('copyFromDataLayer', function(key) {
+      if (key === 'event') return 'purchase';
+      if (key === 'ecommerce') return {
+        transaction_id: 'ORDER-456',
+        value: 49.99,
+        currency: 'USD'
+      };
+      return undefined;
+    });
+
+    mock('sendHttpRequest', function(url, callback, options, body) {
+      callback(200);
+    });
+
+    runCode(mockData);
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Tag skips when no click ID and auto mode
+  code: |-
+    const mockData = {
+      publishableKey: 'sf_pub_test',
+      orgId: 'test-org-id',
+      eventType: 'auto',
+      apiEndpoint: 'https://api.wrpper.com',
+      cookieName: '_wrp',
+      clickParam: 'inf_click_id',
+      debugMode: false,
+      gtmOnSuccess: function() {},
+      gtmOnFailure: function() {}
+    };
+
+    mock('getCookieValues', function(name) { return []; });
+    mock('getQueryParameters', function(param) { return undefined; });
+    mock('copyFromDataLayer', function(key) {
+      if (key === 'event') return 'page_view';
+      return undefined;
+    });
+
+    runCode(mockData);
+    assertApi('gtmOnSuccess').wasCalled();
+
+
 ___NOTES___
 
 Created by Wrpper (https://wrpper.com).
-Influencer attribution tracking - from click to conversion.
