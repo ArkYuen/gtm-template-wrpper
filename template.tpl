@@ -5,6 +5,7 @@ Template Gallery Developer Terms of Service available at
 https://developers.google.com/tag-manager/gallery-tos (or such other URL as
 Google may provide), as modified from time to time.
 
+
 ___INFO___
 
 {
@@ -28,6 +29,7 @@ ___INFO___
     "WEB"
   ]
 }
+
 
 ___TEMPLATE_PARAMETERS___
 
@@ -185,6 +187,7 @@ ___TEMPLATE_PARAMETERS___
     ]
   }
 ]
+
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
@@ -433,6 +436,7 @@ if (clickId || isExplicitEvent || isConversionEvent) {
 }
 
 
+
 ___WEB_PERMISSIONS___
 
 [
@@ -585,6 +589,7 @@ ___WEB_PERMISSIONS___
   }
 ]
 
+
 ___TESTS___
 
 scenarios:
@@ -651,6 +656,9 @@ scenarios:
     assertApi('gtmOnSuccess').wasCalled();
 
 
+
 ___NOTES___
 
 Created by Wrpper (https://wrpper.com).
+
+
