@@ -9,7 +9,7 @@ ___INFO___
 
 {
   "displayName": "Wrpper Influencer Attribution",
-  "description": "Automatically attributes influencer-driven conversions to the originating creator. Reads the Wrpper click cookie and sends conversion events (purchase, add_to_cart, begin_checkout) to your Wrpper account — no custom code required. One install, full attribution.",
+  "description": "Automatically attributes influencer-driven conversions to the originating creator. Reads the Wrpper click cookie and sends conversion events (purchase, add_to_cart, begin_checkout) to your Wrpper account - no custom code required. One install, full attribution.",
   "categories": ["AFFILIATE_MARKETING", "ATTRIBUTION", "ADVERTISING"],
   "id": "cvt_wrpper_influencer_attribution",
   "type": "TAG",
@@ -33,7 +33,7 @@ ___TEMPLATE_PARAMETERS___
         "type": "NON_EMPTY"
       }
     ],
-    "help": "Your Wrpper publishable key (starts with sf_pub_). Find this in your Wrpper dashboard under Settings → API Keys.",
+    "help": "Your Wrpper publishable key (starts with sf_pub_). Find this in your Wrpper dashboard under Settings > API Keys.",
     "placeholder": "sf_pub_xxxxxxxxxxxxxxxxxxxx"
   },
   {
@@ -179,7 +179,7 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-// Wrpper Influencer Attribution Tag — GTM Community Template
+// Wrpper Influencer Attribution Tag - GTM Community Template
 // Sends influencer-attributed conversion events to the Wrpper API.
 // Reads the _wrp first-party cookie for click attribution.
 
@@ -222,18 +222,17 @@ function getClickId() {
   if (cookieValues && cookieValues.length > 0) {
     var cookieVal = cookieValues[0];
     // Cookie stores JSON: {"click_id":"...","ts":...}
-    // Try parsing, fall back to raw value for legacy format
-    try {
+    // Parse if it looks like JSON, otherwise use raw value
+    if (cookieVal.indexOf('{') === 0) {
       var parsed = JSON.parse(cookieVal);
       if (parsed && parsed.click_id) {
         log('Click ID from cookie', parsed.click_id);
         return parsed.click_id;
       }
-    } catch(e) {
-      // Raw value
-      log('Click ID from cookie (raw)', cookieVal);
-      return cookieVal;
     }
+    // Raw value (legacy format)
+    log('Click ID from cookie (raw)', cookieVal);
+    return cookieVal;
   }
 
   // 2. Fall back to URL param (first visit, cookie not yet set)
@@ -243,7 +242,7 @@ function getClickId() {
     return clickId;
   }
 
-  log('No click ID found — event will be sent without attribution');
+  log('No click ID found - event will be sent without attribution');
   return null;
 }
 
@@ -300,7 +299,7 @@ function getEcommerceData() {
       orderId = orderId || makeString(ecommerce.transaction_id);
     }
     if (ecommerce.value) {
-      // GA4 sends value in dollars — convert to cents
+      // GA4 sends value in dollars - convert to cents
       revenue = revenue || makeString(Math.round(makeNumber(ecommerce.value) * 100));
     }
     if (ecommerce.currency) {
@@ -404,7 +403,7 @@ function sendEvent(eventType, clickId) {
 
 // --- Main ---
 if (!publishableKey || !orgId) {
-  log('Missing publishableKey or orgId — tag inactive');
+  log('Missing publishableKey or orgId - tag inactive');
   data.gtmOnFailure();
   return;
 }
@@ -420,7 +419,7 @@ var isConversionEvent = eventType === 'conversion' || eventType === 'add_to_cart
 if (clickId || isExplicitEvent || isConversionEvent) {
   sendEvent(eventType, clickId);
 } else {
-  log('No attribution and no explicit event config — skipping');
+  log('No attribution and no explicit event config - skipping');
   data.gtmOnSuccess();
 }
 
@@ -580,4 +579,4 @@ ___WEB_PERMISSIONS___
 ___NOTES___
 
 Created by Wrpper (https://wrpper.com).
-Influencer attribution tracking — from click to conversion.
+Influencer attribution tracking - from click to conversion.
