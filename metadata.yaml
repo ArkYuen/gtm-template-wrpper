@@ -2,6 +2,7 @@ homepage: "https://wrpper.com"
 documentation: "https://wrpper.com/docs/gtm"
 
 versions:
-  # Latest version
+  - sha: 4bd10be53f97b652b7926da5b0a52901856e0013
+    changeNotes: Re-publish to Community Gallery with updated metadata.
   - sha: e63b159ca8ff844b9731bd95625cf16785674c64
     changeNotes: Initial release — auto-detects purchase, add_to_cart, and begin_checkout events. Reads _wrp attribution cookie. Supports GA4 and UA ecommerce dataLayer formats.
